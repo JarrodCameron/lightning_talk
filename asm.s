@@ -8,9 +8,10 @@ main:
     nop
 
     ; Relative jump to `call'
-    jmp $ + 44
+    jmp shellcode_bot
 
     ; We now have the address of &argv[0]
+shellcode_top:
     pop edi
 
     ; Save *filename
@@ -48,7 +49,7 @@ main:
     ; Syscall number
     mov eax, 0x0b
 
-    ; Syscall()
+    ; execve()
     int 0x80
 
     ; If fail, then exit(0)
@@ -58,7 +59,8 @@ main:
     int 0x80
 
     ; Go back to `pop edi'
-    call $ - 42
+shellcode_bot:
+    call shellcode_top
 
     arg1 db "/usr/bin/mpv", 0, 0, 0, 0              ; argv[0] -> Program to invoke
     arg2 db "vid.mkv", 0                            ; argv[1] -> Selected video

