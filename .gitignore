@@ -1,2 +1,7 @@
 *.swp
 *.mkv
+asm
+payload.o
+vuln
+hak
+.gdb_history

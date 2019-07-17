@@ -10,16 +10,13 @@ all: vuln hak
 
 vuln: vuln.c
 
-hak: hak.c
-	$(CC) hak.c -o hak
-
-asm: payload.s
-	nasm -f elf32 payload.s
-	gcc -m32 payload.o -o payload
-	rm payload.o
+asm: asm.s
+	nasm -f elf32 asm.s
+	gcc -m32 asm.o -o asm
+	rm asm.o
 
 payload: payload.c
-	$(CC) payload.c -o payload
+	$(CC) -m32 -g payload.c -o payload
 
 clean:
 	rm -f *.o *.txt payload vuln hak
