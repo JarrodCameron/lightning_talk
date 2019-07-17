@@ -2,8 +2,13 @@ section     .text
 global main
 main:
 
+    ; Add these so the code is four byte aligned
+    nop
+    nop
+    nop
+
     ; Relative jump to `call'
-    jmp $ + 42
+    jmp $ + 44
 
     ; We now have the address of &argv[0]
     pop edi
@@ -41,7 +46,7 @@ main:
     lea edx, [esp]
 
     ; Syscall number
-    add eax, 0x0b
+    mov eax, 0x0b
 
     ; Syscall()
     int 0x80
@@ -52,7 +57,8 @@ main:
     xor ebx, ebx
     int 0x80
 
-    call $ - 40
+    ; Go back to `pop edi'
+    call $ - 42
 
     arg1 db "/usr/bin/mpv", 0, 0, 0, 0              ; argv[0] -> Program to invoke
     arg2 db "vid.mkv", 0                            ; argv[1] -> Selected video

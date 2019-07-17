@@ -10,6 +10,9 @@ all: vuln hak
 
 vuln: vuln.c
 
+hak: hak.c
+	$(CC) -m32 hak.c -o hak
+
 asm: asm.s
 	nasm -f elf32 asm.s
 	gcc -m32 asm.o -o asm
@@ -19,5 +22,5 @@ payload: payload.c
 	$(CC) -m32 -g payload.c -o payload
 
 clean:
-	rm -f *.o *.txt payload vuln hak
+	rm -f *.o *.txt payload vuln hak asm .gdb_history
 
