@@ -2,8 +2,12 @@
 
 ## Steps to execute
 
-1. `setarch ``uname -m`` -R ``which bash``` to disable aslr for `bash`.
-    Every child process will aslr disabled.
+1. Use the command below to disable aslr of an instance of `bash.
+    Every child process will have aslr disabled.
+
+```
+setarch ``uname -m`` -R /bin/bash
+```
 
 2. Construct the binairies, `vuln` and `hak`, with `make`.
 
