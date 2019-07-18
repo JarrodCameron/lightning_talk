@@ -2,6 +2,8 @@
 *.mkv
 asm
 payload.o
+payload
+payload_asm
 vuln
 hak
 .gdb_history
