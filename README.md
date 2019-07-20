@@ -4,8 +4,9 @@
 
 ### Linux
 
-1. Use the command below to disable aslr of an instance of `bash.
-    Every child process will have aslr disabled.
+1. Use the command below to disable
+[aslr](https://en.wikipedia.org/wiki/Address_space_layout_randomization)
+for an instance of `bash`. Every child process will have aslr disabled.
 
 ```
 setarch `uname -m` -R /bin/bash
@@ -17,7 +18,7 @@ setarch `uname -m` -R /bin/bash
 
 NOTE: If there is a segmentation fault (highly likely), that is most likely
 from an invalid return address. Update `goal` in hak.c to the address given
-by vuln, and recompile with `make`.
+by vuln, and continue from step 2.
 
 ### MacOS
 

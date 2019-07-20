@@ -1,6 +1,3 @@
-// Author: Jarrod Cameron (z5210220)
-// Date:   16/07/19 10:55
-
 #include <stdio.h>
 #include <unistd.h>
 #include <stdint.h>
