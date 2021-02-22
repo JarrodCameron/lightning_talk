@@ -19,9 +19,6 @@
 ;   // If we fail then quit.
 ;   exit(0)
 
-DEFAULT rel
-; TODO Do we need this?
-
 section     .text
 global main
 main:

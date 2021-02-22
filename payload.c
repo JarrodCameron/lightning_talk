@@ -3,10 +3,6 @@
 
 void payload (void)
 {
-	__asm__("nop");
-	__asm__("nop");
-	__asm__("nop");
-
 	char argv1[] = "/usr/bin/mpv";
 	char argv2[] = "vid.mkv";
 	char *argv[] = {argv1, argv2, NULL};
