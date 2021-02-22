@@ -1,5 +1,10 @@
 # Lightning Talk
 
+```
+This is the same as the master branch but has support for Arch Linux. The only
+difference is the shellcode contains the environment "HOME=/home/jc"
+```
+
 ## Steps to execute
 
 ### Linux

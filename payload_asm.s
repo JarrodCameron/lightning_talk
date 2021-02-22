@@ -8,6 +8,7 @@
 ;   };
 ;
 ;   char *env[] = {
+;       "HOME=/home/jc",
 ;       "XDG_RUNTIME_DIR=/run/user/1000",
 ;       "DISPLAY=:0",
 ;       NULL
@@ -18,73 +19,53 @@
 ;   // If we fail then quit.
 ;   exit(0)
 
+DEFAULT rel
+; TODO Do we need this?
 
 section     .text
 global main
 main:
 
-    ; Add these so the code is four byte aligned
-    nop
-    nop
-    nop
+        call .checkpoint
 
-    ; Relative jump to `call'
-    jmp shellcode_bot
+.checkpoint:
+        ; Move &checkpoint into `eax`
+        mov eax, [esp]
 
-    ; We now have the address of &argv[0]
-shellcode_top:
-    pop edi
+        xor ebx, ebx
+        push ebx
 
-    ; Save *filename
-    lea ebx, [edi]
+        lea ebx, [eax + (argv2-$) - (.checkpoint-$)]
+        push ebx
 
-    ; push NULL
-    xor eax, eax
-    push eax
+        lea ebx, [eax + (argv1-$) - (.checkpoint-$)]
+        push ebx
 
-    ; push &argv[1]
-    lea eax, [edi + 16]
-    push eax
+        xor ebx, ebx
+        push ebx
 
-    ; push &argv[0]
-    push edi
+        lea ebx, [eax + (envp3-$) - (.checkpoint-$)]
+        push ebx
 
-    ; Save **args
-    lea ecx, [esp]
+        lea ebx, [eax + (envp2-$) - (.checkpoint-$)]
+        push ebx
 
-    ; push NULL
-    xor eax, eax
-    push eax
+        lea ebx, [eax + (envp1-$) - (.checkpoint-$)]
+        push ebx
 
-    ; push &env[0]
-    lea eax, [edi + 56]
-    push eax
+        lea edx, [esp]
+        lea ecx, [esp + 16]
+        lea ebx, [eax + (argv1-$) - (.checkpoint-$)]
+        lea eax, [0xb]
+        int 0x80
 
-    ; push &env[1]
-    lea eax, [edi + 24]
-    push eax
+        ; exit(0)
+        lea eax, [1]
+        xor ebx, ebx
+        int 0x80
 
-    ; Save **env
-    lea edx, [esp]
-
-    ; Syscall number
-    mov eax, 0x0b
-
-    ; execve()
-    int 0x80
-
-    ; If fail, then exit(0)
-    xor eax, eax
-    inc eax
-    xor ebx, ebx
-    int 0x80
-
-    ; Go back to `pop edi'
-shellcode_bot:
-    call shellcode_top
-
-    arg1 db "/usr/bin/mpv", 0, 0, 0, 0              ; argv[0] -> Program to invoke
-    arg2 db "vid.mkv", 0                            ; argv[1] -> Selected video
-    env1 db "XDG_RUNTIME_DIR=/run/user/1000", 0, 0  ; env[0] -> Video stuff
-    env2 db "DISPLAY=:0", 0, 0                      ; env[1] -> Where to start on the screen
-
+argv1:  db "/usr/bin/mpv", 0
+argv2:  db "vid.mkv", 0
+envp1:  db "HOME=/home/jc", 0
+envp2:  db "XDG_RUNTIME_DIR=/run/user/1000", 0
+envp3:  db "DISPLAY=:0", 0
