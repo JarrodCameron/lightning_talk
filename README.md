@@ -1,8 +1,8 @@
 # Lightning Talk
 
 ```
-This is the same as the master branch but has support for Arch Linux. The only
-difference is the shellcode contains the environment "HOME=/home/jc"
+This has been tested on Arch Linux. It will only work if your home directory
+is "/home/jc". You should probably try the "UbuntuSupport" branch.
 ```
 
 ## Steps to execute
