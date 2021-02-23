@@ -19,4 +19,3 @@ payload: payload.c
 
 clean:
 	rm -f *.o *.txt payload vuln hak payload_asm
-

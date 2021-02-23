@@ -41,9 +41,8 @@ int main (int argc, char **argv)
 		write(STDOUT_FILENO, "", sizeof(""));
 
 	sscanf(argv[1], "%x", &goal);
-	for (int i = 0; i < 80; i++) {
+	for (int i = 0; i < 80; i++)
 		write(STDOUT_FILENO, (void*)&goal, 4);
-	}
 
 	return 0;
 }

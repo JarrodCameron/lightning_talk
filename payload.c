@@ -3,14 +3,18 @@
 
 void payload (void)
 {
-	char argv1[] = "/usr/bin/mpv";
-	char argv2[] = "vid.mkv";
-	char *argv[] = {argv1, argv2, NULL};
+	char *argv[] = {
+		"/usr/bin/mpv",
+		"vid.mkv",
+		NULL
+	};
 
-	char envp1[] = "HOME=/home/jc";
-	char envp2[] = "XDG_RUNTIME_DIR=/run/user/1000";
-	char envp3[] = "DISPLAY=:0";
-	char *envp[] = {envp1, envp2, envp3, NULL};
+	char *envp[] = {
+		"HOME=/home/jc",
+		"XDG_RUNTIME_DIR=/run/user/1000",
+		"DISPLAY=:0",
+		NULL
+	};
 
 	execve(argv[0], argv, envp);
 
@@ -20,7 +24,7 @@ void payload (void)
 
 int main (void)
 {
-    payload();
-    return 0;
+	payload();
+	return 0;
 }
 

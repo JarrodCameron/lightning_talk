@@ -15,6 +15,7 @@ for an instance of `bash`. Every child process will have aslr disabled.
 
 ```
 setarch `uname -m` -R /bin/bash
+export PS1="(no aslr) $PS1"
 ```
 
 2. Construct the binairies, `vuln` and `hak`, with `make`.

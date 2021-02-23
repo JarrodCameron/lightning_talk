@@ -6,18 +6,17 @@
 
 void vuln(void)
 {
-    char buffer[256];
+	char buffer[256];
 
-    printf("Show me some elite hacker skillz\n");
-    printf("The buffer is at %p\n", buffer);
-    gets(buffer);
-
+	printf("Show me some elite hacker skillz\n");
+	printf("The buffer is at %p\n", buffer);
+	gets(buffer);
 }
 
 int main (void)
 {
-    setbuf(stdout, NULL);
-    vuln();
-    return 0;
+	setbuf(stdout, NULL);
+	vuln();
+	return 0;
 }
 
